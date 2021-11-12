@@ -68,6 +68,14 @@ class HomeController extends Controller
         $userDetails=[];
         $subject=$request->email;
         if($request->id == ''){
+            $validated = $request->validate([
+                'name' => 'required',
+                'email' => 'required|email|unique:users,email',
+                'password' => 'required',
+                'designation' => 'required',
+            ]);
+
+
             $userDetails['name'] = $request->name;
             $userDetails['email'] = $request->email;
             $userDetails['password'] = Hash::make($request->password);
@@ -169,5 +177,23 @@ class HomeController extends Controller
         print_r($random);
     }
 
-    
+    public function check_email()
+    {
+        $email = $_GET['email'];
+        print_r($email);die;
+        if($email != "") 
+        {
+            $result = User::where('email',$email)->first();
+            if($result>0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+                
+    }
 }

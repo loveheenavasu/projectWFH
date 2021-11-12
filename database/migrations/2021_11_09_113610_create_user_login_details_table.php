@@ -18,9 +18,9 @@ class CreateUserLoginDetailsTable extends Migration
             $table->string('user_id');
             $table->string('login_date');
             $table->string('login_time');
-            $table->string('lunch_time_start');
-            $table->string('lunch_time_end');
-            $table->string('logout_time');
+            $table->string('lunch_time_start')->nullable();
+            $table->string('lunch_time_end')->nullable();
+            $table->string('logout_time')->nullable();
             $table->timestamps();
         });
     }
