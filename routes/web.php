@@ -31,5 +31,7 @@ Route::get('/start_login', [App\Http\Controllers\HomeController::class, 'start_l
 Route::get('/start_lunch', [App\Http\Controllers\HomeController::class, 'start_lunch'])->name('start_lunch');
 Route::get('/stop_lunch', [App\Http\Controllers\HomeController::class, 'stop_lunch'])->name('stop_lunch');
 Route::get('/stop_login', [App\Http\Controllers\HomeController::class, 'stop_login'])->name('stop_login');
+Route::get('/check_email', [App\Http\Controllers\HomeController::class, 'check_email'])->name('check_email');
+
 Route::get('/generate_password', [App\Http\Controllers\HomeController::class, 'generate_password'])->name('generate_password');
 
