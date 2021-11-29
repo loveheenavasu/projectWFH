@@ -46,10 +46,10 @@
                     <td>{{ $user['designation'] }}</td>
                     <td >
                       <div class="btn-group btn-group-sm">
-                        <a href="{{ route('userEdit',$user->id) }}" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
+                        <a href="{{ route('userEdit',$user->id) }}" class="btn btn-info btn-sm" ><i class="fas fa-pencil-alt"></i> Edit</a>
                       </div>
                       <div class="btn-group btn-group-sm">
-                        <a href="{{ route('deleteUser',$user->id) }}" class="btn btn-danger"><i class="fas fa-trash"></i> Delete</a>
+                        <a href="#" class="btn btn-danger delete_record_d  btn-sm" data-id="{{$user->id}}" id="delete_record"><i class="fas fa-trash"></i> Delete</a>
                       </div>
                     </td>
                   </tr>
@@ -66,6 +66,7 @@
   </div>
 
   @include('footer');
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
   $(document).ready(function(){
     $('#example2').DataTable({
@@ -76,6 +77,42 @@
       "info": true,
       "autoWidth": false,
       "responsive": true,
+    }); 
+
+
+    $('.delete_record_d').click(function() {
+          var id = $(this).attr('data-id');
+          SwalDelete(id);
+      });
     });
+    function SwalDelete(id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "It will be deleted permanently!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!',
+                showLoaderOnConfirm: true,
+                preConfirm: function() {
+                    return new Promise(function(resolve) {
+                        $.ajax({
+                                url: '/deleteUser',
+                                data:{id:id},
+                                dataType: 'json'
+                            })
+                            .done(function(response) {
+
+                                Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+                                window.location.reload();
+                            })
+                            .fail(function() {
+                                Swal.fire('Oops...', 'Something went wrong with ajax !', 'error')
+                            });
+                    });
+                },   
   });
+}
+
 </script>
