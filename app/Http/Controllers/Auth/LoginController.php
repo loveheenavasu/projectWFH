@@ -42,12 +42,6 @@ class LoginController extends Controller
         ]);
         if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
         {
-            date_default_timezone_set('Asia/Kolkata'); 
-            $login_details = [];
-            $login_details['user_id'] = Auth::user()->id;
-            $login_details['login_date'] = date('Y-m-d');
-            $login_details['login_time'] = date('h:i:s');
-            UserLoginDetails::create($login_details);
             return redirect()->route('dashboard');
         }else{
             return redirect()->route('login')

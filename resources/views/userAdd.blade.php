@@ -74,21 +74,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/additional-methods.min.js"></script>
     <script>
-// $(document).ready(function(){
-//   // $.validator.setDefaults({
-//   //   submitHandler: function () {
-//   //     alert( "Form successful submitted!" );
-//   //   }
-//   // });
-//   $("#generate").click(function(){
-//   $.ajax({
-//           url: "/generate_password",
-//           success: function(result){
-//             $('#exampleInputPassword1').val(result);
-//           }
+$(document).ready(function(){
+  $("#generate").click(function(){
+  $.ajax({
+          url: "/generate_password",
+          success: function(result){
+            $('#exampleInputPassword1').val(result);
+          }
 
-//       });
-//   });
+      });
+  });
 //   $('#quickForm').validate({
 //     rules: {
 //       name: {
@@ -145,5 +140,5 @@
 //   });
 
   
-// });
+ });
 </script>

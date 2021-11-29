@@ -11,15 +11,16 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <script src="{{ asset('js/app.js') }}"></script>
 </head>
 <body>
@@ -78,23 +79,7 @@
     </div>
 </body>
 </html>
-<script type="text/javascript">
-    
-$(document).ready(function() {
-    $("#logout").click(function(){
-        var stop_time= moment().format("hh:mm:ss");
-            $.ajax({
-                url: "/stop_login",
-                data:{stop_time:stop_time},
-                success: function(result){
-                }
 
-            });
-    });
-});
-
-
-</script>
 
 
 

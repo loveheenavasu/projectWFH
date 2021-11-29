@@ -14,6 +14,10 @@ use Illuminate\Mail\Mailable;
 
 class HomeController extends Controller
 {
+    public $name;
+    public $designation;
+    public $email;
+    public $password;
     /**
      * Create a new controller instance.
      *
@@ -36,7 +40,11 @@ class HomeController extends Controller
 
     public function dashboard()
     {
-        return view('userdashboard');
+        
+        $project['result'] = UserLoginDetails::where('user_id',Auth::user()->id)
+        ->get();
+        //echo "<pre>";print_r(count($project));die;
+        return view('userdashboard',$project);
     }
 
     public function userAdd()
@@ -83,14 +91,14 @@ class HomeController extends Controller
 
             // Send Mail Start 
 
-            // $name = "nihal";
-            // $email = "aman.zestgeek@gmail.com";
-            // $title = "Demo";
-            // $content = "testing for testing";
+            $name = $request->name;
+            $email = $request->email;
+            $password = $request->password;
+            
 
-            // Mail::send('emails.mail', ['name' => $name, 'email' => $email, 'title' => $title, 'content' => $content], function ($message) {
-            //     $message->to('testing6666@yopmail.com')->subject('Subject of the message!');
-            // });
+            $data = Mail::send('emails.user_login_details', ['name' => $name, 'email' => $email,'password' => $password], function ($message) use($request) {
+                $message->to($request->email)->subject('Users Credentials');
+            });
             // Send Mail end
             $result = User::create($userDetails);
             
@@ -107,18 +115,39 @@ class HomeController extends Controller
 
     }
 
-    public function deleteUser($id)
+    public function deleteUser()
     {
+        $id = $_GET['id'];
         $result = User::where('id',$id)->delete();
         if($result){
-        return redirect()->route('userlist')
-                        ->with('success','Product deleted successfully');
+            $response['status']  = 'success';
+            $response['message'] = 'Product Deleted Successfully ...';
         }
         else{
-            print_r("sorry Somthing went wrong");
+            $response['status']  = 'error';
+            $response['message'] = 'Unable to delete product ...';
         }
+        echo json_encode($response);
     }
-
+    public function start_login()
+    {
+        $start_time = $_GET['start_time'];
+        date_default_timezone_set('Asia/Kolkata'); 
+        if (UserLoginDetails::where('login_date',date('Y-m-d'))
+            ->where('user_id',Auth::user()->id)
+            ->exists()) {
+                    return 1;
+            }
+            else{
+                $login_details = [];
+                $login_details['user_id'] = Auth::user()->id;
+                $login_details['login_date'] = date('Y-m-d');
+                $login_details['login_time'] = $start_time;
+                $project = UserLoginDetails::create($login_details);
+            }
+        
+    }
+    
     
     public function start_lunch()
     {
@@ -130,9 +159,10 @@ class HomeController extends Controller
         ])->update(['lunch_time_start' => $start_lunch]);
         
         if($project){
+            return 0;
         }
         else{
-            print_r("something wrong!!!please try again");
+            return 1;
         }
         
     }
@@ -147,9 +177,10 @@ class HomeController extends Controller
         ])->update(['lunch_time_end' => $stop_lunch]);
         
         if($project){
+            return 0;
         }
         else{
-            print_r("something wrong!!!please try again");
+            return 1;
         }
         
     }
@@ -164,9 +195,10 @@ class HomeController extends Controller
         ])->update(['logout_time' => $stop_time]);
         
         if($project){
+            return 0;
         }
         else{
-            print_r("something wrong!!!please try again");
+            return 1;
         }
         
     }
@@ -180,7 +212,6 @@ class HomeController extends Controller
     public function check_email()
     {
         $email = $_GET['email'];
-        print_r($email);die;
         if($email != "") 
         {
             $result = User::where('email',$email)->first();
