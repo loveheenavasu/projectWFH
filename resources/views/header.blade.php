@@ -30,6 +30,7 @@
   <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
   <!-- summernote -->
   <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 <style type="text/css">
   
@@ -39,8 +40,8 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{ route('dashboard') }}" class="brand-link">
-      <img src="{{ asset('dist/img/Z Logo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">Zestgeek</span>
+      <img src="{{ asset('dist/img/Z Logo.png') }}" alt="AdminLTE Logo" class="brand-image-logo img-rounded elevation-8">
+      <span class="brand-text font-weight-light"></span>
     </a>
 
     <!-- Sidebar -->
@@ -68,7 +69,7 @@
               </li>
             </ul>
           </li>
-          @if(Auth::user()->name == 'admin')
+          @if(Auth::user()->role == 'admin')
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-user"></i>
