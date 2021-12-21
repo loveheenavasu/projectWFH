@@ -44,6 +44,7 @@
                     <td>{{ $user['name'] }}</td>
                     <td>{{ $user['email'] }}</td>
                     <td>{{ $user['designation'] }}</td>
+                    @if($user['role'] != 'admin')
                     <td >
                       <div class="btn-group btn-group-sm">
                         <a href="{{ route('userEdit',$user->id) }}" class="btn btn-info btn-sm" ><i class="fas fa-pencil-alt"></i> Edit</a>
@@ -52,6 +53,7 @@
                         <a href="#" class="btn btn-danger delete_record_d  btn-sm" data-id="{{$user->id}}" id="delete_record"><i class="fas fa-trash"></i> Delete</a>
                       </div>
                     </td>
+                    @endif
                   </tr>
                   @endforeach
                   @endif

@@ -1,0 +1,9 @@
+.brand-image-logo{
+	line-height: .8;
+    margin-left: 0.8rem;
+    margin-right: 0.5rem;
+    margin-top: -3px;
+    max-height: 38px;
+    width: 200px;
+    background-color: #dcdcdc;
+}
