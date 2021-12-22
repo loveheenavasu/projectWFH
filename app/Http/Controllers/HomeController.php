@@ -42,8 +42,9 @@ class HomeController extends Controller
     {
         
         $project['result'] = UserLoginDetails::where('user_id',Auth::user()->id)
+        ->where('login_date',date('Y-m-d'))
         ->get();
-        //echo "<pre>";print_r(count($project));die;
+        // echo "<pre>";print_r($project);die;
         return view('userdashboard',$project);
     }
 
