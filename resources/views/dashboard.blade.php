@@ -28,25 +28,25 @@
                               
                               @endphp
                             @if(count($result)>0)
-                            
-                              @if($result[0]['login_time'] == '' && $result[0]['login_date'] == date('Y-m-d') ) 
-                              
-                                  <button type="button" id="start_login" class="btn btn-primary btn-lg"> Click to Login </button>
-                              @endif
-                              @if($result[0]['lunch_time_start'] == '' && $result[0]['login_date'] == date('Y-m-d'))
-                              
-                                  <button type="button" id="start_lunch" class="btn btn-primary btn-lg"> Lunch Begins </button>
-                              
-                              @endif
-                              @if($result[0]['lunch_time_end'] == '' && $result[0]['login_date'] == date('Y-m-d'))     
-                                  <button type="button" id="stop_lunch" class="btn btn-primary btn-lg"> Lunch Ends </button>
-                              @endif
-                              @if($result[0]['logout_time'] == '' && $result[0]['login_date'] == date('Y-m-d'))   
-                                  <button type="button" id="logout_button" class="btn btn-primary btn-lg"> Logout </button>
-                              @endif
-                              @if($result[0]['logout_time'] != '' && $result[0]['login_time'] != '')
-                                <button type="button" id="start_login" class="btn btn-primary btn-lg"> Click to Login </button>
-                              @endif
+                                @foreach($result as $user_details)
+                                  @if($user_details['login_time'] == '' && $user_details['login_date'] == date('Y-m-d')) 
+                                      <button type="button" id="start_login" class="btn btn-primary btn-lg"> Click to Login </button>
+                                  @endif
+                                  @if($user_details['lunch_time_start'] == '' && $user_details['login_date'] == date('Y-m-d'))
+                                      <button type="button" id="start_lunch" class="btn btn-primary btn-lg"> Lunch Begins </button>
+                                  @endif
+                                  @if($user_details['lunch_time_end'] == '' && $user_details['login_date'] == date('Y-m-d'))
+                                      <button type="button" id="stop_lunch" class="btn btn-primary btn-lg"> Lunch Ends </button>
+                                  @endif
+                                  @if($user_details['logout_time'] == '' && $user_details['login_date'] == date('Y-m-d'))
+                                      <button type="button" id="logout_button" class="btn btn-primary btn-lg"> Logout </button>
+                                  @endif
+                                  @if($user_details['logout_time'] != '' && $user_details['login_time'] != '')
+                                    <button type="button" id="start_login" class="btn btn-primary btn-lg"> Click to Login </button>
+                                  @endif
+
+                                @endforeach
+
                             @else
                                 <button type="button" id="start_login" class="btn btn-primary btn-lg"> Click to Login </button>
                             @endif
@@ -68,7 +68,6 @@
 <script type="text/javascript">
 
     $(document).ready(function() {
-        
         
         $('#start_login').click(function(){
             var start_time= moment().format("hh:mm:ss");
