@@ -37,7 +37,7 @@
 </style>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <aside class="main-sidebar elevation-4">
     <!-- Brand Logo -->
     <a href="{{ route('dashboard') }}" class="brand-link">
       <img src="{{ asset('dist/img/Z Logo.png') }}" alt="AdminLTE Logo" class="brand-image-logo img-rounded elevation-8">
@@ -48,7 +48,7 @@
     <div class="sidebar">
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="dist/img/user6-128x128.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="#" class="d-block">{{ Auth::user()->name }}</a>
@@ -63,7 +63,7 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{ route('dashboard') }}" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-archway nav-icon"></i>
                   <p>Dashboard</p>
                 </a>
               </li>
@@ -75,7 +75,7 @@
               <i class="nav-icon far fa-user"></i>
               <p>
                 User Details
-                <i class="fas fa-angle-left right"></i>
+                <i class="fas fa-angle-left"></i>
               </p>
             </a>
               <ul class="nav nav-treeview">
