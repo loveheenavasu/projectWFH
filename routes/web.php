@@ -17,6 +17,9 @@ Route::get('/', function () {
     return view('auth/login');
 });
 Auth::routes();
+$to = '/dashboard';
+
+Route::redirect('/', $to);
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');

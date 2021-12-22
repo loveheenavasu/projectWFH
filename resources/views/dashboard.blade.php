@@ -100,7 +100,7 @@
                   if(result == 0){
                     swal({ 
                           title: "OK",
-                          text: "Lunch Break started! successfully!", 
+                          text: "Lunch Break started!", 
                           icon: "success"
                         
                        }).then(function(){
