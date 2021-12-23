@@ -1,5 +1,19 @@
-@include('header');
 <div class="content-wrapper">
+  <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Users</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Add new user</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
   <section class="content">
       <div class="container-fluid">
         <div class="row">
@@ -12,7 +26,7 @@
               </div>
               <!-- /.card-header -->
         <!--error ends-->
-              <form id="quickForm" method="POST" action="{{ route('addUser') }}">
+              <form id="quickForm" method="post">
                 @csrf
                 <div class="card-body">
                   <div class="form-group">
@@ -59,7 +73,7 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="submit" class="btn btn-primary" id="new_user_add">Submit</button>
                 </div>
               </form>
             </div>
@@ -70,75 +84,3 @@
       </div><!-- /.container-fluid -->
     </section>
   </div>
-@include('footer');
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/additional-methods.min.js"></script>
-    <script>
-$(document).ready(function(){
-  $("#generate").click(function(){
-  $.ajax({
-          url: "/generate_password",
-          success: function(result){
-            $('#exampleInputPassword1').val(result);
-          }
-
-      });
-  });
-//   $('#quickForm').validate({
-//     rules: {
-//       name: {
-//         required: true,
-//       },
-//       email: {
-//         required: true,
-//         email: true,
-//         remote: {
-//           url: "/check_email",
-//           type: "post",
-//           email: function()
-//               {
-//                   return $('#quickForm :input[name="email"]').val();
-//               }
-//           }
-//         },
-     
-//       password: {
-//         required: true,
-//         minlength: 5
-//       },
-//       designation: {
-//         required: true
-//       },
-//     },
-//     messages: {
-//       name: {
-//         required: "Please enter a name"
-//       },
-//       email: {
-//         required: "Please enter a email address",
-//         email: "Please enter a vaild email address"
-//       },
-//       password: {
-//         required: "Please provide a password",
-//         minlength: "Your password must be at least 5 characters long"
-//       },
-//       designation: {
-//         required: "Please provide a designation"
-//       }
-//     },
-//     errorElement: 'span',
-//     errorPlacement: function (error, element) {
-//       error.addClass('invalid-feedback');
-//       element.closest('.form-group').append(error);
-//     },
-//     highlight: function (element, errorClass, validClass) {
-//       $(element).addClass('is-invalid');
-//     },
-//     unhighlight: function (element, errorClass, validClass) {
-//       $(element).removeClass('is-invalid');
-//     }
-//   });
-
-  
- });
-</script>

@@ -25,7 +25,7 @@ Route::redirect('/', $to);
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
 Route::get('/userAdd', [App\Http\Controllers\HomeController::class, 'userAdd'])->name('userAdd');
 Route::get('/userlist', [App\Http\Controllers\HomeController::class, 'userlist'])->name('userlist');
-Route::get('/userEdit/{Id}', [App\Http\Controllers\HomeController::class, 'userEdit'])->name('userEdit');
+Route::post('/userEdit', [App\Http\Controllers\HomeController::class, 'userEdit'])->name('userEdit');
 Route::post('/addUser', [App\Http\Controllers\HomeController::class, 'addUser'])->name('addUser');
 Route::get('/deleteUser', [App\Http\Controllers\HomeController::class, 'deleteUser'])->name('deleteUser');
 Route::get('/attendance_list', [App\Http\Controllers\HomeController::class, 'attendance_list'])->name('attendance_list');
@@ -34,7 +34,7 @@ Route::get('/start_login', [App\Http\Controllers\HomeController::class, 'start_l
 Route::get('/start_lunch', [App\Http\Controllers\HomeController::class, 'start_lunch'])->name('start_lunch');
 Route::get('/stop_lunch', [App\Http\Controllers\HomeController::class, 'stop_lunch'])->name('stop_lunch');
 Route::get('/stop_login', [App\Http\Controllers\HomeController::class, 'stop_login'])->name('stop_login');
-Route::get('/check_email', [App\Http\Controllers\HomeController::class, 'check_email'])->name('check_email');
+Route::post('/check_email', [App\Http\Controllers\HomeController::class, 'check_email'])->name('check_email');
 
 Route::get('/generate_password', [App\Http\Controllers\HomeController::class, 'generate_password'])->name('generate_password');
 

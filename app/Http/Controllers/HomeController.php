@@ -40,7 +40,6 @@ class HomeController extends Controller
 
     public function dashboard()
     {
-        
         $project['result'] = UserLoginDetails::where('user_id',Auth::user()->id)
         ->where('login_date',date('Y-m-d'))
         ->get();
@@ -54,13 +53,15 @@ class HomeController extends Controller
     }
     public function userlist()
     {
-        $result['data'] = User::get();
+        
+        $result['data'] = User::where('role','user')->get();
         return view('usersList',$result);
     }
 
-    public function userEdit($id)
-    {
+    public function userEdit(Request $request)
+    {  
         
+        $id = $request['id'];
         $result['data'] = User::where('id',$id)->first();
         return view('userUpdate',$result);
     }
@@ -77,14 +78,6 @@ class HomeController extends Controller
         $userDetails=[];
         $subject=$request->email;
         if($request->id == ''){
-            $validated = $request->validate([
-                'name' => 'required',
-                'email' => 'required|email|unique:users,email',
-                'password' => 'required',
-                'designation' => 'required',
-            ]);
-
-
             $userDetails['name'] = $request->name;
             $userDetails['email'] = $request->email;
             $userDetails['password'] = Hash::make($request->password);
@@ -95,23 +88,25 @@ class HomeController extends Controller
             $name = $request->name;
             $email = $request->email;
             $password = $request->password;
-            
 
             $data = Mail::send('emails.user_login_details', ['name' => $name, 'email' => $email,'password' => $password], function ($message) use($request) {
                 $message->to($request->email)->subject('Users Credentials');
             });
             // Send Mail end
-            $result = User::create($userDetails);
-            
-            return redirect()->route('userlist');
+            $data_result = User::create($userDetails);
+            $result['data'] = User::where('role','user')->get();
+            return view('usersList',$result);
         }
         else{
             $userDetails['name'] = $request->name;
             $userDetails['email'] = $request->email;
             $userDetails['password'] = Hash::make($request->password);
             $userDetails['designation'] = $request->designation;
-            $result = User::where('id', $request->id)->update($userDetails);
-            return redirect()->route('userlist');
+            $new_result = User::where('id', $request->id)->update($userDetails);
+            $result['data'] = User::where('role','user')->get();
+            return view('usersList',$result);
+            
+            // return route('userlist');
         }
 
     }
@@ -210,19 +205,19 @@ class HomeController extends Controller
         print_r($random);
     }
 
-    public function check_email()
+    public function check_email(Request $request)
     {
-        $email = $_GET['email'];
+        $email = $request['email'];
         if($email != "") 
         {
-            $result = User::where('email',$email)->first();
+            $result = User::where('email',$email)->get();
+            $result = $result->count();
             if($result>0)
             {
-                return false;
+                echo(json_encode("Email already in use!"));
             }
-            else
-            {
-                return true;
+            else{
+                echo(json_encode(true));
             }
         }
 

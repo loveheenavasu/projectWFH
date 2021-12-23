@@ -1,4 +1,3 @@
-@include('header');
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -28,7 +27,7 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="example2" class="table table-bordered table-hover">
+                <table id="example2" class="table table-bordered datatable table-hover">
                   <thead>
                   <tr>
                     <th>Name</th>
@@ -44,16 +43,17 @@
                     <td>{{ $user['name'] }}</td>
                     <td>{{ $user['email'] }}</td>
                     <td>{{ $user['designation'] }}</td>
-                    @if($user['role'] != 'admin')
-                    <td >
+                    
+                    <td>
                       <div class="btn-group btn-group-sm">
-                        <a href="{{ route('userEdit',$user->id) }}" class="btn btn-info btn-sm" ><i class="fas fa-pencil-alt"></i> Edit</a>
+                        <button type="button" class="btn btn-info btn-sm edit_record_d" data-id="{{$user->id}}"><i class="fas fa-pencil-alt"></i>Edit</button>
+                        
                       </div>
                       <div class="btn-group btn-group-sm">
-                        <a href="#" class="btn btn-danger delete_record_d  btn-sm" data-id="{{$user->id}}" id="delete_record"><i class="fas fa-trash"></i> Delete</a>
+                        <button type="button" class="btn btn-danger btn-sm delete_record_d" data-id="{{$user->id}}"><i class="fas fa-trash"></i>Delete</button>
                       </div>
                     </td>
-                    @endif
+                    
                   </tr>
                   @endforeach
                   @endif
@@ -67,8 +67,11 @@
     </section>
   </div>
 
-  @include('footer');
+  <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
   <script>
   $(document).ready(function(){
     $('#example2').DataTable({
@@ -81,13 +84,26 @@
       "responsive": true,
     }); 
 
+    $('.edit_record_d').click(function() {
+          var id = $(this).attr('data-id');
+        $.ajax({
+                type: 'post', 
+                url: '/userEdit',
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                data:{id:id},
+                success : function (result) {
+                $(".content-wrapper").html(result);
+            }
+            });
+      });
 
     $('.delete_record_d').click(function() {
           var id = $(this).attr('data-id');
+          
           SwalDelete(id);
       });
-    });
-    function SwalDelete(id) {
+  });
+  function SwalDelete(id) {
             Swal.fire({
                 title: 'Are you sure?',
                 text: "It will be deleted permanently!",
