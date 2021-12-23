@@ -239,7 +239,6 @@ $(document).on('click','#new_user_add',function(e) {
     let email = $('#exampleInputEmail1').val();
     let password = $('#exampleInputPassword1').val();
     let designation = $('#exampleInputdesignation').val();
-    console.log(password,name,email,designation);
      $.ajax({
         type:"POST",
         url : "/addUser", 
