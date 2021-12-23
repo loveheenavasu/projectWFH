@@ -68,7 +68,7 @@
 <script type="text/javascript">
 
     $(document).ready(function() {
-        
+       
         $('#start_login').click(function(){
             var start_time= moment().format("hh:mm:ss");
             $.ajax({
