@@ -137,6 +137,10 @@ class HomeController extends Controller
                 $login_details['login_date'] = date('Y-m-d');
                 $login_details['login_time'] = $start_time;
                 $project = UserLoginDetails::create($login_details);
+                $response['result'] = UserLoginDetails::where('user_id',Auth::user()->id)
+                ->where('login_date',date('Y-m-d'))
+                ->get();
+                return view('login_details.lunchstart',$response);
             }
         
     }
@@ -152,7 +156,10 @@ class HomeController extends Controller
         ])->update(['lunch_time_start' => $start_lunch]);
         
         if($project){
-            return 0;
+            $response['result'] = UserLoginDetails::where('user_id',Auth::user()->id)
+                ->where('login_date',date('Y-m-d'))
+                ->get();
+                return view('login_details.lunchend',$response);
         }
         else{
             return 1;
@@ -170,7 +177,10 @@ class HomeController extends Controller
         ])->update(['lunch_time_end' => $stop_lunch]);
         
         if($project){
-            return 0;
+            $response['result'] = UserLoginDetails::where('user_id',Auth::user()->id)
+                ->where('login_date',date('Y-m-d'))
+                ->get();
+                return view('login_details.lunchend',$response);
         }
         else{
             return 1;
@@ -188,7 +198,10 @@ class HomeController extends Controller
         ])->update(['logout_time' => $stop_time]);
         
         if($project){
-            return 0;
+            $response['result'] = UserLoginDetails::where('user_id',Auth::user()->id)
+                ->where('login_date',date('Y-m-d'))
+                ->get();
+                return view('login_details.logout',$response);
         }
         else{
             return 1;
