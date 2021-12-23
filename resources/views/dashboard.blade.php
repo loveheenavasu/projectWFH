@@ -51,6 +51,7 @@
                                 <button type="button" id="start_login" class="btn btn-primary btn-lg"> Click to Login </button>
                             @endif
                             
+                            
                           </div>
                       </div>
                   </div>
@@ -68,85 +69,85 @@
 <script type="text/javascript">
 
     $(document).ready(function() {
-       
-        $('#start_login').click(function(){
+        $(document).on('click','#start_login',function(e) {
+          e.preventDefault();
             var start_time= moment().format("hh:mm:ss");
             $.ajax({
                 url: "/start_login",
                 data:{start_time:start_time},
                 success: function(result){
-                if(result == 0){
+                if(result != 1){
                   swal({ 
                         title: "OK",
-                        text: "Login Time Entered! successfully!", 
+                        text: "Login Time Entered!", 
                         icon: "success",
                          }).then(function(){
-                      window.location.reload();
                   });
+                  $(".content-wrapper").html(result);
                 }
                 else{
-                  swal("Here!", "You have already entered your login time!", "success");
+                  swal("Here!", "You have already entered your login time!");
                 }
               }
             });
         });
-        $("#start_lunch").click(function(){
+        $(document).on('click','#start_lunch',function(e) {
+          e.preventDefault();
             var start_lunch= moment().format("hh:mm:ss");
             $.ajax({
                 url: "/start_lunch",
                 data:{start_lunch:start_lunch},
                 success: function(result){
-                  if(result == 0){
+                  if(result != 1){
                     swal({ 
                           title: "OK",
                           text: "Lunch Break started!", 
                           icon: "success"
                         
                        }).then(function(){
-                          window.location.reload();
+                          
                       });
-                  
+                    $(".content-wrapper").html(result);
                   }
                 }
 
             });
         });
-        $("#stop_lunch").click(function(){
+        $(document).on('click','#stop_lunch',function(e) {
+          e.preventDefault();
             var stop_lunch= moment().format("hh:mm:ss");
             $.ajax({
                 url: "/stop_lunch",
                 data:{stop_lunch:stop_lunch},
                 success: function(result){
-                  if(result == 0){
+                  if(result != 1){
                     swal({ 
                           title: "Done",
                           text: "Lunch Break Ended!", 
                           icon: "success"
-                         }).then(function(){
-                          window.location.reload();
-                      }
-                    );
+                         })
+                    $(".content-wrapper").html(result);
+                    $("#start_lunch").hide();
                   }
                 }
-
             });
         });
 
-        $("#logout_button").click(function(){
-        var stop_time= moment().format("hh:mm:ss");
+        $(document).on('click','#logout_button',function(e) {
+          e.preventDefault(); 
+          var stop_time= moment().format("hh:mm:ss");
             $.ajax({
                 url: "/stop_login",
                 data:{stop_time:stop_time},
                 success: function(result){
-                  if(result == 0){
+                  if(result != 1){
                   swal({ 
-                          title: "OK",
+                          title: "Done",
                           text: "Logout Time Entered successfully!", 
-                          icon: "Alert"
-                        }).then(function(){
-                          window.location.reload();
-                      }
-                    );
+                        })
+                  $(".content-wrapper").html(result);
+                  $("#stop_lunch").hide();
+                  $("#start_lunch").hide();
                   } 
                 }
 
