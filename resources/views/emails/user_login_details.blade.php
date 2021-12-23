@@ -211,7 +211,7 @@
                     <tbody>
                       <tr>
                         <td style="padding:15px 20px; border-color: #7373732e; border-style: solid; border-width: 1px 1px 1px 1px; background:#fff;">
-                          <p style="color: #737373; font-size: 14px; font-family: 'Roboto', sans-serif; margin: 0px; text-align: center;">strong>Copyright &copy; 2014-2021 <a href="https://zestgeek.com">Zestgeek</a>.</strong>
+                          <p style="color: #737373; font-size: 14px; font-family: 'Roboto', sans-serif; margin: 0px; text-align: center;"><strong>Copyright &copy; 2014-2021 <a href="https://zestgeek.com">Zestgeek</a>.</strong>
                             All rights reserved.</p>
                         </td>
                       </tr>
