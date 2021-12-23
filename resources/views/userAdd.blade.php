@@ -26,7 +26,7 @@
               </div>
               <!-- /.card-header -->
         <!--error ends-->
-              <form id="quickForm" method="post">
+              <form id="quickForm">
                 @csrf
                 <div class="card-body">
                   <div class="form-group">
