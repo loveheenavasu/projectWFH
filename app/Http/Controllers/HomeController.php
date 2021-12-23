@@ -111,19 +111,18 @@ class HomeController extends Controller
 
     }
 
-    public function deleteUser()
+    public function deleteUser(Request $request)
     {
-        $id = $_GET['id'];
+        $id = $request['id'];
         $result = User::where('id',$id)->delete();
         if($result){
-            $response['status']  = 'success';
-            $response['message'] = 'Product Deleted Successfully ...';
+            $response['data'] = User::where('role','user')->get();
+            return view('usersList',$response);
         }
         else{
-            $response['status']  = 'error';
-            $response['message'] = 'Unable to delete product ...';
+            $response['data'] = User::where('role','user')->get();
+            return view('usersList',$response);
         }
-        echo json_encode($response);
     }
     public function start_login()
     {
