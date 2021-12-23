@@ -27,7 +27,7 @@ Route::get('/userAdd', [App\Http\Controllers\HomeController::class, 'userAdd'])-
 Route::get('/userlist', [App\Http\Controllers\HomeController::class, 'userlist'])->name('userlist');
 Route::post('/userEdit', [App\Http\Controllers\HomeController::class, 'userEdit'])->name('userEdit');
 Route::post('/addUser', [App\Http\Controllers\HomeController::class, 'addUser'])->name('addUser');
-Route::get('/deleteUser', [App\Http\Controllers\HomeController::class, 'deleteUser'])->name('deleteUser');
+Route::post('/deleteUser', [App\Http\Controllers\HomeController::class, 'deleteUser'])->name('deleteUser');
 Route::get('/attendance_list', [App\Http\Controllers\HomeController::class, 'attendance_list'])->name('attendance_list');
 
 Route::get('/start_login', [App\Http\Controllers\HomeController::class, 'start_login'])->name('start_login');

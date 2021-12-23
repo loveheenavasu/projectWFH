@@ -113,6 +113,7 @@
 
   <!-- Content Wrapper. Contains page content -->
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript">
   
 $(".nav-item a").on("click", function() {
@@ -121,7 +122,45 @@ $(".nav-item a").on("click", function() {
 });
 
 $(document).ready(function(){
-  
+  $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    }); 
+  $(document).on('click','.edit_record_d',function(e) {
+    e.preventDefault();
+        var id = $(this).attr('data-id');
+        $.ajax({
+                type: 'post', 
+                url: '/userEdit',
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                data:{id:id},
+                success : function (result) {
+                $(".content-wrapper").html(result);
+            }
+            });
+      });
+    $(document).on('click','.delete_record_d',function(e) {
+      var delete_user=confirm("Are you sure you want to delete this user");
+      if (delete_user==true)
+      {
+      var id = $(this).attr('data-id');
+          $.ajax({
+                type: 'post', 
+                url: '/deleteUser',
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                data:{id:id},
+                success : function (result) {
+                $(".content-wrapper").html(result);
+            }
+          });
+
+      }
+  });
   $('#user_list').click(function(){
     $.ajax({
             type: 'GET', 
@@ -267,7 +306,36 @@ $("#generate").click(function(){
   });
 
 });
+function SwalDelete(id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "It will be deleted permanently!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!',
+                showLoaderOnConfirm: true,
+                preConfirm: function() {
+                    return new Promise(function(resolve) {
+                        $.ajax({
+                                url: '/deleteUser',
+                                data:{id:id},
+                                dataType: 'json'
+                            })
+                            .done(function(response) {
 
+                                Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+                                $(".content-wrapper").html(response);
+                            })
+                            .fail(function(response) {
+                                Swal.fire('Oops...', 'Something went wrong with ajax !', 'error')
+                                $(".content-wrapper").html(response);
+                            });
+                    });
+                },   
+  });
+}
   
 </script>
   
