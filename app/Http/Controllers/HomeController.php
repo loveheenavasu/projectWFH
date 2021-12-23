@@ -105,8 +105,6 @@ class HomeController extends Controller
             $new_result = User::where('id', $request->id)->update($userDetails);
             $result['data'] = User::where('role','user')->get();
             return view('usersList',$result);
-            
-            // return route('userlist');
         }
 
     }
