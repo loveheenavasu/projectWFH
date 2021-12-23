@@ -1,5 +1,4 @@
-<div class="content-wrapper">
-  <section class="content">
+<section class="content">
       <div class="container-fluid">
         <div class="row">
           <!-- left column -->
@@ -40,5 +39,5 @@
             </div>
         </div>
       </div>
-    </section>
-  </div>
+</section>
+
