@@ -1,6 +1,4 @@
-
-<div class="content-wrapper">
-    <!-- Content Header (Page header) -->
+<!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row">
@@ -57,10 +55,9 @@
           </div>
         </div>
       </div>
-    </section>
-  </div>
+</section>
 
-  <script>
+<script>
   $(document).ready(function(){
     $('#example2').DataTable({
       "paging": true,
